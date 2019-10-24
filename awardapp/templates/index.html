@@ -34,21 +34,22 @@
   <img src="{{image.image.url}}" height="300" alt="pict" class="image" >
   <div class="card-body">
       <div>
-        <a  class="btn" href="{% url 'like' id=image.id%}" >
-            <!-- <p >{{image.likes}} Likes <i class="fa fa-heart-o" ></i></p> -->
+          <p style="font-family: sans-serif;">
+              Description : {{image.description}}</p>
+        <!-- <a  class="btn" href="{% url 'like' id=image.id%}" >
+            <p >{{image.likes}} Likes <i class="fa fa-heart-o" ></i></p> 
         
-        </a>
-  <a href="{% url 'comment' image.id %}"><i class="fa fa-comment-o" style="color: black;"></i></a>
+        </a> -->
+  
         </div>
   <a type="button" class="btn btn-success" style="font-family: sans-serif;font-size: 18px;" href="{{image.link}}">
    Link</a>
-    <p style="font-family: sans-serif;">
-        Description : {{image.description}}</p>
+   
   
   {% for com in image.comment_set.all %}
   <p>{{com.comment}}</p>
   {% endfor %}
-  <p>add comment...</p>
+  <p><a href="{% url 'comment' image.id %}"><i class="fa fa-comment-o" style="color: black;"></i></a>add comment...</p>
 </div>
 </div>
 </div>
