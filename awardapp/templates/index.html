@@ -22,7 +22,7 @@
   </div>
 </header>
 <br>
-<p><strong>Sites of the day</strong> Previpus Winners</p>
+<p><strong>Sites of the day</strong> Previous Winners</p>
 <br>
 
   <div class="container">
@@ -31,18 +31,20 @@
   <div class="col-md-5" style=" ">
   <div class="card" >
  
-  <img src="{{image.image.url}}" height="300" alt="pict" class="img-responsive" >
+  <img src="{{image.image.url}}" height="300" alt="pict" class="image" >
   <div class="card-body">
       <div>
         <a  class="btn" href="{% url 'like' id=image.id%}" >
-            <p >{{image.likes}} Likes <i class="fa fa-heart-o" ></i></p>
+            <!-- <p >{{image.likes}} Likes <i class="fa fa-heart-o" ></i></p> -->
         
         </a>
   <a href="{% url 'comment' image.id %}"><i class="fa fa-comment-o" style="color: black;"></i></a>
         </div>
-  <p style="font-family: sans-serif;">
-    Description : {{image.description}}</p>
-  <hr>
+  <a type="button" class="btn btn-success" style="font-family: sans-serif;font-size: 18px;" href="{{image.link}}">
+   Link</a>
+    <p style="font-family: sans-serif;">
+        Description : {{image.description}}</p>
+  
   {% for com in image.comment_set.all %}
   <p>{{com.comment}}</p>
   {% endfor %}
@@ -72,6 +74,15 @@
   </div>
 </div>
   <style>
+    .image:hover{
+        box-shadow: 0 1px 328px rgba(0, 0, 0, 0.25),0 1px 2px rgba(0, 0, 0, 0.22);
+        /* transition:  .5s ease ; */
+        opacity: 0.7;
+      
+        overflow: hidden;
+        transform:translate(-3px);
+    
+    }
     .container{
       display: flex;
       justify-content: space-between;

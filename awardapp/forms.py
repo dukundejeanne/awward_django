@@ -1,10 +1,10 @@
-from .models import Image,Comment,Profile,User
+from .models import Project,Comment,Profile,User
 from django import forms
 from django.forms import ModelForm,Textarea,IntegerField
 
-class NewImageForm(forms.ModelForm):
+class NewProjectForm(forms.ModelForm):
     class Meta:
-        model=Image
+        model=Project
         exclude=['user','likes',]
         # widgets = {
         #     'tags': forms.CheckboxSelectMultiple(),

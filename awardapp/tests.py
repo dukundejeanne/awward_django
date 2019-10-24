@@ -5,7 +5,7 @@ from django.test import TestCase
 
 # Create your tests here.
 from django.test import TestCase
-from .models import Image,User,Profile,Comment
+from .models import Project,User,Profile,Comment
 import datetime as dt
 
 class ImageTestClass(TestCase):
@@ -18,12 +18,12 @@ class ImageTestClass(TestCase):
         self.user1.save()
         
         
-        self.image=Image(name='leaves',description='beautiful',user=self.user1,likes="1",post="image")
+        self.image=Project(name='leaves',description='beautiful',user=self.user1,likes="1",post="image")
         self.image.save_image()
 
  
     def test_instance(self):
-        self.assertTrue(isinstance(self.image,Image))
+        self.assertTrue(isinstance(self.image,Project))
 
     def test_save_method(self):
         '''
@@ -39,7 +39,7 @@ class ImageTestClass(TestCase):
         test of delete image
         '''
        
-        Image.objects.all().delete()
+        Project.objects.all().delete()
 
    
     
@@ -61,7 +61,7 @@ class CommentTestClass(TestCase):
         self.nature=Profile(2,user=self.user1,bio='Nature')
         self.nature.save_prof()
 
-        self.james=Image(2,name='James',description='beautiful',user=self.user1,likes="1",post="image")
+        self.james=Project(2,name='James',description='beautiful',user=self.user1,likes="1",post="image")
         self.james.save_image()
       
         self.com=Comment(comment='leaves',comment_image=self.james,posted_by=self.nature,)
