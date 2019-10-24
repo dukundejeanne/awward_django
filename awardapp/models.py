@@ -41,16 +41,6 @@ class Project(models.Model):
     def filter_by_name(cls,name):
         images=Project.objects.filter(name=name)
         return images
-    # @classmethod
-    # def update_description(cls, id):
-    #     pictures = cls.objects.filter(id=id).update(id=id)
-    #     return pictures
-
-  
-    
-    # @classmethod
-    # def get_image_by_id(cls)
-
 
 class Profile(models.Model):
     class Meta:

@@ -64,7 +64,7 @@ def profilemy(request,username=None):
     pictures=Project.objects.filter(user=current_user)
     if not username:
         username=request.user.username
-        images=Project.objects.filter(name=username)
+        images=Project.objects.filter(title=username)
         # proc_img=Profile.objects.filter(user=current_user).first()
     return render(request,'profilemy.html',locals(),{"pictures":pictures})
 
