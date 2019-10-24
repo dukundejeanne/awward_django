@@ -1,0 +1,127 @@
+
+{% extends 'all_news/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css?family=Charmonman|Dancing+Script|Kodchasan|Spirax|Abril+Fatface" rel="stylesheet">
+<header>
+  <div class="header">
+    <img src="static/image/images (9).jpeg" id="im">
+    <div class="text">
+      <p>Site of the day{{image.pub_date}}</p>
+     
+    </div>
+    <div class="bt">
+        <button class="btn btn-success">visite site</button>
+        <button class="btn btn-primary">collect</button>
+    </div>
+    
+
+    
+  </div>
+</header>
+<br>
+<p><strong>Sites of the day</strong> Previpus Winners</p>
+<br>
+
+  <div class="container">
+<divc class="row">
+  {% for image in pictures %}
+  <div class="col-md-5" style=" ">
+  <div class="card" >
+ 
+  <img src="{{image.image.url}}" height="300" alt="pict" class="img-responsive" >
+  <div class="card-body">
+      <div>
+        <a  class="btn" href="{% url 'like' id=image.id%}" >
+            <p >{{image.likes}} Likes <i class="fa fa-heart-o" ></i></p>
+        
+        </a>
+  <a href="{% url 'comment' image.id %}"><i class="fa fa-comment-o" style="color: black;"></i></a>
+        </div>
+  <p style="font-family: sans-serif;">
+    Description : {{image.description}}</p>
+  <hr>
+  {% for com in image.comment_set.all %}
+  <p>{{com.comment}}</p>
+  {% endfor %}
+  <p>add comment...</p>
+</div>
+</div>
+</div>
+  {% endfor %}
+</div>
+</div>
+  <div class="jumbotron text-center mt-0" style="background-color:white;">
+    <form action="{% url 'homePage' %}" method="post">
+      {%csrf_token%}
+      {% bootstrap_form letterForm %}
+      <input type="submit" value="Subscribe here">
+
+    </form>
+
+  </div>
+  <div class="container">
+
+  <div class="footer text-center">
+  
+  <p style="font-size:18px;"><strong>Dukunde Marie Jeanne 2019</strong></p>
+     
+ 
+  </div>
+</div>
+  <style>
+    .container{
+      display: flex;
+      justify-content: space-between;
+    }
+    .header{
+      position: relative;
+    }
+    .text{
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: white;
+      /* padding-left:0px ; */
+      /* padding-right:0px ; */
+    }
+    .bt{
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      border-radius: 10
+      0%;
+      
+
+    }
+    #im{
+      width: 100%;
+      height: auto;
+      opacity:0.9;
+    }
+    .img_profile{
+      
+      width: 50px;
+      height: 50px;
+      border-radius:50%;
+    }
+  </style>
+<!-- //from w3school  -->
+  <!-- <script>
+
+      function like(element){
+        for (var num=1;num>=1;num++){
+          likes = document.getElementById(element).innerHTML=num++;
+        }
+
+        
+          // var num = 0;
+          
+          // document.parseInt("likes")+1;
+        
+      }
+    
+  </script> -->
+{% endblock %}
