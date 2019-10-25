@@ -1,0 +1,131 @@
+{% extends 'all_news/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css?family=Charmonman|Dancing+Script|Kodchasan|Spirax|Abril+Fatface" rel="stylesheet">
+<header>
+        <div class="header" >
+            {% for images in projects %}
+            <img src="{{images.image.url}}" width="100%" height="450vh">
+            <p class="title">{{images.title}}</p>
+            
+            <div class="bt">
+            <button class="btn btn-outline-success" style="border-radius:25px;"><a href="{{images.link}}" style="color: white;">visite site</a></button>
+        </div>
+       
+        {% endfor %}
+        </div>
+</header>
+<br>
+<body>
+    <div class="row design">
+        
+        <div class="col-md-3">
+                <h3>Content </h3><hr class="bg-default"><br><h4>{{content}}</h4>
+            </div><br>
+            <div class="col-md-3">
+                    <h3>Usability  </h3><hr class="bg-default"><br><h4>{{usability}}</h4>
+            </div><br>
+            <div class="col-md-3">
+                    <h3>Design</h3><hr class="bg-default"><br><h4>{{design}}</h4>
+            </div>
+            </div>
+
+    {% if user.is_authenthicated %}
+    <button class="btn btn-outline-info" type="button" data-target="#votesform" data-toggle="modal">Rate</button>
+    <a href="{{images.link}}" class="btn btn-pink btn-md pull-right" target="_blank"><i class="far fa-chevron-double-right"></i></a>
+            {% if user.id not in auth %}
+            <br>
+<!-- not typed -->
+<div class="modal fade" id="VotesForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Vote</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+                <div class="form animated slideInDown">
+                                <form action="/projects/{{projects.id}}" method="POST">
+                                        {% csrf_token %}
+                                        {% bootstrap_form form %}
+                                        <button class="btn btn-outline-info modal-footer d-flex justify-content-center" type="submit">Submit <i class="fas fa-paper-plane-o ml-1"></i> </button>
+                                </form>
+                        </div>
+      </div>
+ 
+      </div>
+    </div>
+  </div>
+</div>
+
+                {%else%}
+                <p class="alert alert-success">Thanks for your rating</p>
+                {%endif %}
+                {% else %}
+                <a href="/accounts/login/" class="btn btn-outline-info ">Log in to rate</a>
+                {% endif %}
+        </div>
+        <div class="card comments">
+                <div class="card-header">
+                        <h4> Total Votes: {{all|length}} </h4>
+                </div>
+                <div class="list-group">
+                        <ul class="list-group">
+                                {%if all%}
+                                <table id='comm' class="table">
+                                        <th>Voters</th>
+                                        <th>Rating</th>
+                                        {%for you in all%}<tr>
+                                                <td> <img src="{{you.user.profile.profile_photo.url}}" alt="" width='30px' height="30px">  {{you.user}}</td>
+                                                <td>
+                                                        <div class="design">
+                                                                <a href="" class="scores">{{you.design}}.0</a>
+                                                                <a href="">{{you.usability}}.0</a>
+                                                                <a class='b' href="">{{you.content}}.0</a>
+                                                        </div>
+                                                </td>
+                                                {%endfor%}
+                                </table>
+                                {%else%}
+                                <li class="list-group-item alert alert-info">No votes Available</li>
+                                {%endif%}
+                        </ul>
+                </div>
+        </div>
+        </div>
+        </div>
+        <div>
+        
+
+</body>
+
+<style>
+    .header{
+      position: relative;
+      width: 100%;
+      height: auto;
+      opacity:0.9;
+    }
+    
+    .title{
+        position:absolute;
+        top:50%;
+        left:30%;
+        transform: translate(-50%,-50%);
+        color:white;
+        font-size:50px;
+        font-family:'Grand Hotel',cursive ;
+    }
+    .bt{
+      position: absolute;
+      bottom: 20px;
+      left: 20px; 
+    }
+</style>
+
+{% endblock %}

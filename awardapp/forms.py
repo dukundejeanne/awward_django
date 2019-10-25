@@ -1,4 +1,4 @@
-from .models import Project,Comment,Profile,User
+from .models import Project,Comment,Profile,User,Rates
 from django import forms
 from django.forms import ModelForm,Textarea,IntegerField
 
@@ -19,6 +19,15 @@ class UpdatebioForm(forms.ModelForm):
     class Meta:
         model=Profile
         exclude=['user','followers','following']
+class VotesForm(forms.ModelForm):
+    class Meta:
+        model=Rates
+        fields=('design','usability','content')
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model=Comment
+        fields=('comment',)
 
 class NewsLetterForm(forms.Form):
     your_name=forms.CharField(label='First Name', max_length=40)

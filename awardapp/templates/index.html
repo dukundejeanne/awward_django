@@ -9,12 +9,13 @@
   <div class="header">
     <img src="static/image/images (9).jpeg" id="im">
     <div class="text">
-      <p>Site of the day{{image.pub_date}}</p>
+      <p>Site of the <day>{{image.pub_date|date}}</day></p>
      
     </div>
+    <h1 id="aw">Award Application</h1>
     <div class="bt">
-        <button class="btn btn-outline-success">visite site</button>
-        <button class="btn btn-outline-primary">collect</button>
+        <button class="btn btn-success" style="border-radius:25px;">visite site</button>
+        <button class="btn btn-outline-primary" style="border-radius:25px;">collect</button>
     </div>
     
 
@@ -28,21 +29,24 @@
   <div class="container">
 <divc class="row">
   {% for image in pictures %}
-  <div class="col-md-5" style=" ">
+  <div class="col-md-6" width="400 px">
   <div class="card" >
  
-  <img src="{{image.image.url}}" height="300" alt="pict" class="image" >
+  <img src="{{image.image.url}}" height="300" alt="pict" class="image card-img-top" >
+  <div class="mask flex-center rgba-black-strong">
+    <a href="{% url 'projects' image.id %}" class="btn btn-outline-success" id="btv" style="border-radius:15px;">More</a>
+  </div>
   <div class="card-body">
       <div>
           <p style="font-family: sans-serif;">
-              Description : {{image.description}}</p>
+              Title: {{image.title}}</p>
         <!-- <a  class="btn" href="{% url 'like' id=image.id%}" >
             <p >{{image.likes}} Likes <i class="fa fa-heart-o" ></i></p> 
         
         </a> -->
-  
+        <p>{{image.pub_date|date:"F d,Y"}}</p>
         </div>
-  <a type="button" class="btn btn-success" style="font-family: sans-serif;font-size: 18px;" href="{{image.link}}">
+  <a type="button" class="btn btn-success" style="border-radius:10px;font-family: sans-serif;font-size: 8px;" href="{{image.link}}">
    Link</a>
    
   
@@ -75,6 +79,15 @@
   </div>
 </div>
   <style>
+    #aw{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+      color:white;
+      font-size:50px;
+      font-family:'Grand Hotel',cursive ;
+    }
     .image:hover{
         box-shadow: 0 1px 328px rgba(0, 0, 0, 0.25),0 1px 2px rgba(0, 0, 0, 0.22);
         /* transition:  .5s ease ; */
@@ -91,6 +104,15 @@
     .header{
       position: relative;
     }
+    #btv{
+      position:absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        color:white;
+        font-size:13px;
+        font-family:sans-serif ;
+    }
     .text{
       position: absolute;
       top: 20px;
@@ -103,8 +125,7 @@
       position: absolute;
       bottom: 20px;
       left: 20px;
-      border-radius: 10
-      0%;
+      
       
 
     }
@@ -120,20 +141,5 @@
       border-radius:50%;
     }
   </style>
-<!-- //from w3school  -->
-  <!-- <script>
 
-      function like(element){
-        for (var num=1;num>=1;num++){
-          likes = document.getElementById(element).innerHTML=num++;
-        }
-
-        
-          // var num = 0;
-          
-          // document.parseInt("likes")+1;
-        
-      }
-    
-  </script> -->
 {% endblock %}

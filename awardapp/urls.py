@@ -13,6 +13,7 @@ urlpatterns=[
     url(r'^comment/(\d+)/$', views.add_comment, name='comment'),
     url(r'^likes/(?P<id>\d+)',views.likes,name="like"),
     url(r'^search/',  views.search_results,name='search_results'),
+    url(r'^projects/(\d+)',views.projects,name='projects'),
 
 ]
 if settings.DEBUG:
