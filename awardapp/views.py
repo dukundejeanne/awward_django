@@ -7,17 +7,10 @@ from django.contrib.auth.models import User
 from .forms import NewProjectForm,UpdatebioForm,CommentForm,VotesForm
 from .email import send_welcome_email
 from .forms import NewsLetterForm
-# from .forms import NewArticleForm, NewsLetterForm
-
-# @login_required(login_url='/accounts/login/')
-# def home_images(request):
-#     return render(request,'index.html')
-
-# from django.http  import HttpResponse
-
-# Create your views here.
-# def home_images(request):
-#     return HttpResponse('Welcome to the Moringa Tribune')
+from rest_framework.response import Response
+from rest_framework.views import APIView
+# from .models import  MoringaMerch
+from .serializer import MerchSerializer
 
 # display images
 @login_required(login_url='/accounts/login/')
@@ -156,3 +149,9 @@ def newsletter(request):
     send_welcome_email(name, email)
     data = {'success': 'You have been successfully added to mailing list'}
     return JsonResponse(data)
+
+class MerchList(APIView):
+    def get(self, request, format=None):
+        all_merch = Project.objects.all()
+        serializers = MerchSerializer(all_merch, many=True)
+        return Response(serializers.data)
