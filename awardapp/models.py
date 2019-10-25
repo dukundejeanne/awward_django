@@ -49,8 +49,7 @@ class Profile(models.Model):
     profile_pic=models.ImageField(upload_to='picture/',null=True,blank=True)
     user=models.OneToOneField(User, on_delete=models.CASCADE,blank=True,related_name="profile")
     bio=models.TextField(max_length=200,null=True,default="bio")
-    Followers=models.ManyToManyField(User,related_name="followers",blank=True)
-    Following=models.ManyToManyField(User,related_name="following",blank=True)
+    contact=models.TextField(max_length=200,null=True)
     def save_prof(self):
         self.save()
 
