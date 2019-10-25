@@ -12,6 +12,7 @@ from rest_framework.views import APIView
 # from .models import  MoringaMerch
 from .serializer import MerchSerializer,MerchSerializerProfile
 from rest_framework import status
+from .permissions import IsAdminOrReadOnly
 
 # display images
 @login_required(login_url='/accounts/login/')
@@ -162,8 +163,10 @@ class MerchList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (IsAdminOrReadOnly,)
 class MerchListProfile(APIView):
     def get(self, request, format=None):
         all_merch = Profile.objects.all()
         serializers = MerchSerializerProfile(all_merch, many=True)
         return Response(serializers.data)
+    permission_classes = (IsAdminOrReadOnly,)
