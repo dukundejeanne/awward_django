@@ -9,7 +9,7 @@
   <div class="header">
     <img src="static/image/images (9).jpeg" id="im">
     <div class="text">
-      <p>Site of the <day>{{image.pub_date|date}}</day></p>
+      <p>Site of the day on October 24,2019 </p>
      
     </div>
     <h1 id="aw">Award Application</h1>
@@ -30,12 +30,17 @@
 <divc class="row">
   {% for image in pictures %}
   <div class="col-md-6" width="400 px">
-  <div class="card" >
- 
-  <img src="{{image.image.url}}" height="300" alt="pict" class="image card-img-top" >
+    
+  <div class="card wrapper" >
+    <div class="parent" onclick="">
+      <div class="child bg-one">
+          <a href="{% url 'projects' image.id %}" ><img src="{{image.image.url}}" height="300" alt="pict" class="image card-img-top" ></a>
   <div class="mask flex-center rgba-black-strong">
-    <a href="{% url 'projects' image.id %}" class="btn btn-outline-success" id="btv" style="border-radius:15px;">More</a>
+    <!-- <a href="{% url 'projects' image.id %}" class="btn btn-outline-success" id="btv" style="border-radius:15px;">More</a> -->
   </div>
+</div>
+</div>
+</div>
   <div class="card-body">
       <div>
           <p style="font-family: sans-serif;">
@@ -46,21 +51,20 @@
         </a> -->
         <p>{{image.pub_date|date:"F d,Y"}}</p>
         </div>
-  <a type="button" class="btn btn-success" style="border-radius:10px;font-family: sans-serif;font-size: 8px;" href="{{image.link}}">
-   Link</a>
+
    
   
   {% for com in image.comment_set.all %}
   <p>{{com.comment}}</p>
   {% endfor %}
   <p><a href="{% url 'comment' image.id %}"><i class="fa fa-comment-o" style="color: black;"></i></a>add comment...</p>
-</div>
+
 </div>
 </div>
   {% endfor %}
 </div>
 </div>
-  <div class="jumbotron text-center mt-0" style="background-color:white;">
+  <div class="jumbotron text-center mt-0" style="background-color:white;width: 50%; text-align: center; margin-left: 25%;">
     <form action="{% url 'homePage' %}" method="post">
       {%csrf_token%}
       {% bootstrap_form letterForm %}
@@ -79,6 +83,47 @@
   </div>
 </div>
   <style>
+    .parent{
+      overflow: hidden;
+      position:relative;
+      display:inline-block;
+      cursor: pointer;
+    }
+    .child{
+      background-size: cover;
+      background-repeat: no-repeat;
+      -webkit-transition: all .5s;
+      -moz-transition: all .5s;
+      -o-transition: all .5s;
+      transition: all .5s;
+    }
+    .parent:hover .child, .parent:focus .child{
+      -ms-transform: scale(1.2);
+      -moz-transform: scale(1.2);
+      -webkit-transform: scale(1.2);
+      -o-transform: scale(1.2);
+      transform: scale(1.2);
+
+    }
+    .parent:hover .child:before, .parent:focus .child::before{
+      display:block;
+    }
+    .parent:hover a , .parent:focus a{
+      display:block;
+    }
+    .child::before{
+      content:"";
+      display: none;
+      position: absolute;
+      top:0;
+      left: 0;
+      background-color: black;
+      opacity: 0.6;
+    }
+    @media screen and(max-width: 960px){
+      .parent{width: 100%;margin:20px 0px}
+      .wrapper{padding: 20px 20px;}
+    }
     #aw{
       position:absolute;
       top:50%;
@@ -104,7 +149,7 @@
     .header{
       position: relative;
     }
-    #btv{
+    /* #btv{
       position:absolute;
         top:50%;
         left:50%;
@@ -112,6 +157,21 @@
         color:white;
         font-size:13px;
         font-family:sans-serif ;
+    } */
+    #btv{
+      display: none;
+      font-size:35px;
+      color:ffffff !important;
+      font-family: sans-serif;
+      text-align: center;
+      margin: auto;
+      position: absolute;
+      top:0;
+      left:0;
+      bottom:0;
+      right: 0;
+      height: 50px;
+      cursor: pointer;
     }
     .text{
       position: absolute;
@@ -125,9 +185,6 @@
       position: absolute;
       bottom: 20px;
       left: 20px;
-      
-      
-
     }
     #im{
       width: 100%;

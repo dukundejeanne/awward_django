@@ -14,7 +14,7 @@
             <button class="btn btn-outline-success" style="border-radius:25px;"><a href="{{images.link}}" style="color: white;">visite site</a></button>
         </div>
        
-        {% endfor %}
+        
         </div>
 </header>
 <br>
@@ -31,26 +31,26 @@
                     <h3>Design</h3><hr class="bg-default"><br><h4>{{design}}</h4>
             </div>
             </div>
-
-    {% if user.is_authenthicated %}
-    <button class="btn btn-outline-info" type="button" data-target="#votesform" data-toggle="modal">Rate</button>
+            
+   
+   
     <a href="{{images.link}}" class="btn btn-pink btn-md pull-right" target="_blank"><i class="far fa-chevron-double-right"></i></a>
-            {% if user.id not in auth %}
+    <button class="btn btn-outline-info" type="button" data-target="#votesform" data-toggle="modal">Rate</button>
             <br>
 <!-- not typed -->
-<div class="modal fade" id="VotesForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="votesform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Vote</h4>
+        <h4 class="modal-title w-100 font-weight-bold" id="vote">Vote</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body mx-3">
                 <div class="form animated slideInDown">
-                                <form action="/projects/{{projects.id}}" method="POST">
+                                <form action="{% url 'projects' images.id %}"method="POST">
                                         {% csrf_token %}
                                         {% bootstrap_form form %}
                                         <button class="btn btn-outline-info modal-footer d-flex justify-content-center" type="submit">Submit <i class="fas fa-paper-plane-o ml-1"></i> </button>
@@ -62,13 +62,8 @@
     </div>
   </div>
 </div>
-
-                {%else%}
-                <p class="alert alert-success">Thanks for your rating</p>
-                {%endif %}
-                {% else %}
-                <a href="/accounts/login/" class="btn btn-outline-info ">Log in to rate</a>
-                {% endif %}
+{% endfor %}
+      
         </div>
         <div class="card comments">
                 <div class="card-header">
