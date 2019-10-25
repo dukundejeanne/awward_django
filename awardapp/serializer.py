@@ -6,7 +6,7 @@ class MerchSerializer(serializers.ModelSerializer):
         model = Project
         fields = ('title', 'description', 'link','image')
 
-class MerchsSerializer(serializers.ModelSerializer):
+class MerchSerializerProfile(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('profile_pic', 'bio', 'contact')
