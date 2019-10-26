@@ -36,9 +36,8 @@ and user visual code for writing codes
 * create a serializer file
 * create a class in model and view
 * url --url(r'^api-token-auth/', obtain_auth_token)
-{
-    "token": "8d42c1a280f3503e7151de4e336ad23f4229ee85"
-}
+* http://127.0.0.1:8000/api/merch/ for Project
+* http://127.0.0.1:8000/api/merch/ for Profile
 
 ## Run
 Use Terminal to open the server and the brouser to run this application
