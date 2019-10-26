@@ -32,14 +32,3 @@ class ReviewForm(forms.ModelForm):
 class NewsLetterForm(forms.Form):
     your_name=forms.CharField(label='First Name', max_length=40)
     email=forms.EmailField(label='Email')
-
-# class ProfileUpdateForm(forms.ModelForm):
-#     class Meta:
-#         model=Profile
-#         fields=['bio','profile_pic']
-
-# class UserUpdateForm(forms.ModelForm):
-#     email=forms.EmailField()
-#     class Meta:
-#         model=User
-#         fields=['username','email']

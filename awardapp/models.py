@@ -14,6 +14,12 @@ class Project(models.Model):
     likes=models.IntegerField(default=0)
     link=models.TextField(max_length=130)
     pub_date=models.DateTimeField(auto_now_add=True,null=True)
+
+    @classmethod
+    def search_by_title(cls,search_term):
+        projects=cls.objects.filter(title__icontains=search_term)
+        return projects
+
     @classmethod
     def get_all_images(cls):
         images=cls.objects.all().prefetch_related('comment_set')
@@ -70,10 +76,10 @@ class Profile(models.Model):
             returnself.following.count()
         else:
             return 0
-    @classmethod
-    def search(cls,username):
-        profiles=cls.objects.filter(user__username__icontains=username)
-        return profiles
+    # @classmethod
+    # def search_by_title(cls,search_term):
+    #     profiles=cls.objects.filter(title__icontains=search_term)
+    #     return profiles
     # @classmethod
     # def search_by_bio(cls,search_term):
     #     photo=cls.objects.filter(category__photo_category__icontains=search_term)

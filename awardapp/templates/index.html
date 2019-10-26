@@ -64,18 +64,22 @@
   {% endfor %}
 </div>
 </div>
-  <div class="jumbotron text-center mt-0" style="background-color:white;width: 50%; text-align: center; margin-left: 25%;">
+<hr>
+<div class="container">
+
+    <div class="footer text-center">
+  <div class="jumbotron text-center mt-0" style="background-color:white;width: 30%; text-align: center; margin-left: 25%;">
     <form action="{% url 'homePage' %}" method="post">
       {%csrf_token%}
       {% bootstrap_form letterForm %}
-      <input type="submit" value="Subscribe here">
+      <input type="submit" class="btn btn-info" value="Subscribe here">
 
     </form>
 
   </div>
-  <div class="container">
 
-  <div class="footer text-center">
+ 
+
   
   <p style="font-size:18px;"><strong>Dukunde Marie Jeanne 2019</strong></p>
      

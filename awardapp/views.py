@@ -103,10 +103,10 @@ def search_results(request):
 
     if 'username' in request.GET and request.GET["username"]:
         search_term = request.GET.get("username")
-        searched_users = Profile.search(search_term)
+        searched_title = Project.search_by_title(search_term)
         message = f"{search_term}"
 
-        return render(request, 'all_news/search.html',{"message":message,"users": searched_users})
+        return render(request, 'all_news/search.html',{"message":message,"users": searched_title})
 
     else:
         message = "You haven't searched for any term"
@@ -124,18 +124,7 @@ def likes(request,id,project_id):
 def projects(request,id):
     
     projects=Project.objects.filter(id=id)
-    all=Rates.objects.filter(project=id)
-    # count =0
-    # for i in all:
-    #     count +=i.usability
-    #     count +=i.design
-    #     count +=i.content
-    #     if count>0:
-    #         average=round(count/3,1)
-    #     else:
-    #         average=0
-
-  
+    all=Rates.objects.filter(project=id) 
     if request.method == 'POST':
         form = VotesForm(request.POST)
         if form.is_valid():
