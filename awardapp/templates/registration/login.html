@@ -1,11 +1,11 @@
 {%extends "registration/base.html"%}
 {% load bootstrap4 %}
 {% block content %}
-<div class="container">
+<div class="container" style="background-color: darkslategray; width: 50%;">
   <div class="row">
     <!-- Empty div -->
     <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="col-md-4 ">
       {% if form.errors %}
         <p> Password or Username is incorrect </p>
       {% endif %}
