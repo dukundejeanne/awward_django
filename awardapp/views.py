@@ -99,8 +99,6 @@ def add_comment(request,image_id):
         form=CommentForm()
     return render(request,'comment_form.html',{"form":form,"image_id":image_id})
 
-
-
 def search_results(request):
 
     if 'username' in request.GET and request.GET["username"]:
@@ -127,7 +125,17 @@ def projects(request,id):
     
     projects=Project.objects.filter(id=id)
     all=Rates.objects.filter(project=id)
-        
+    # count =0
+    # for i in all:
+    #     count +=i.usability
+    #     count +=i.design
+    #     count +=i.content
+    #     if count>0:
+    #         average=round(count/3,1)
+    #     else:
+    #         average=0
+
+  
     if request.method == 'POST':
         form = VotesForm(request.POST)
         if form.is_valid():
@@ -139,8 +147,25 @@ def projects(request,id):
         
     else:
         form = VotesForm() 
+    calcul=Rates.objects.filter(project=id)
+    usability=[]
+    design=[]
+    content=[]
+    for i in calcul:
+        usability.append(i.usability)
+        design.append(i.design)
+        content.append(i.content)
+
+        if len(usability)>0 or len(design)>0 or len(content)>0:
+            aver_usability=round(sum(usability)/len(usability))
+            aver_design=round(sum(design)/len(design))
+            aver_content=round(sum(content)/len(content))
+        else:
+            aver_usability=0.0
+            aver_design=0.0
+            aver_content=0.0
     
-    return render(request,'one_project.html',{"projects":projects,"all":all,"form":form})
+    return render(request,'one_project.html',{"projects":projects,"all":all,"form":form,"usability":aver_usability,"design":aver_design,"content":aver_content})
 
 def newsletter(request):
     name = request.POST.get('your_name')

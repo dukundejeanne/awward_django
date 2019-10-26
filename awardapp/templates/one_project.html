@@ -12,6 +12,20 @@
             
             <div class="bt">
             <button class="btn btn-outline-success" style="border-radius:25px;"><a href="{{images.link}}" style="color: white;">visite site</a></button>
+            <div class="row design">
+        
+                <div class="col-md-3" id="d1">
+                        <h4>Content </h4><hr class="bg-default"><br><h4>{{content}}</h4>
+                    </div><br>
+                    <div class="col-md-3">
+                            <h3>Usability  </h3><h
+                            r class="bg-default"><br><h4>{{usability}}</h4>
+                    </div><br>
+                    <div class="col-md-3">
+                            <h3>Design</h3><hr class="bg-default"><br><h4>{{design}}</h4>
+                    </div>
+                    </div>
+       
         </div>
        
         
@@ -35,7 +49,7 @@
    
    
     <a href="{{images.link}}" class="btn btn-pink btn-md pull-right" target="_blank"><i class="far fa-chevron-double-right"></i></a>
-    <button class="btn btn-outline-info" type="button" data-target="#votesform" data-toggle="modal">Rate</button>
+    <button class="btn btn-outline-info" type="button" data-target="#votesform" data-toggle="modal">Rating</button>
             <br>
 <!-- not typed -->
 <div class="modal fade" id="votesform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -75,13 +89,13 @@
                                 <table id='comm' class="table">
                                         <th>Voters</th>
                                         <th>Rating</th>
-                                        {%for you in all%}<tr>
-                                                <td> <img src="{{you.user.profile.profile_photo.url}}" alt="" width='30px' height="30px">  {{you.user}}</td>
+                                        {%for one in all%}<tr>
+                                                <td> <img src="{{one.user.profile.profile_photo.url}}" alt="" width='30px' height="30px">  {{one.user}}</td>
                                                 <td>
                                                         <div class="design">
-                                                                <a href="" class="scores">{{you.design}}.0</a>
-                                                                <a href="">{{you.usability}}.0</a>
-                                                                <a class='b' href="">{{you.content}}.0</a>
+                                                                <a href="" class="scores">{{one.design}}</a>
+                                                                <a href="">{{one.usability}}</a>
+                                                                <a class='b' href="">{{one.content}}</a>
                                                         </div>
                                                 </td>
                                                 {%endfor%}
@@ -100,6 +114,13 @@
 </body>
 
 <style>
+        .d1{
+        vertical-align: middle;
+        width: 50px;
+        height: 50px;
+        border-radius:50%;
+        background-color: black;    
+        }
     .header{
       position: relative;
       width: 100%;
