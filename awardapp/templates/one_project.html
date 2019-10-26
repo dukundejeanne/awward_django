@@ -6,6 +6,7 @@
 <link href="https://fonts.googleapis.com/css?family=Charmonman|Dancing+Script|Kodchasan|Spirax|Abril+Fatface" rel="stylesheet">
 <header>
         <div class="header" >
+                
             {% for images in projects %}
             <img src="{{images.image.url}}" width="100%" height="450vh">
             <p class="title">{{images.title}}</p>
@@ -39,6 +40,7 @@
     <a href="{{images.link}}" class="btn btn-pink btn-md pull-right" target="_blank"><i class="far fa-chevron-double-right"></i></a>
     <button class="btn btn-outline-info" type="button" data-target="#votesform" data-toggle="modal">Rating</button>
             <br>
+           
 <!-- not typed -->
 <div class="modal fade" id="votesform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">

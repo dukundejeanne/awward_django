@@ -57,7 +57,7 @@
   {% for com in image.comment_set.all %}
   <p>{{com.comment}}</p>
   {% endfor %}
-  <p><a href="{% url 'comment' image.id %}"><i class="fa fa-comment-o" style="color: black;"></i></a>add comment...</p>
+  <p><a href="{% url 'comment' image.id %}"><i class=""" style="color: black;"></i></a>add comment...</p>
 
 </div>
 </div>
@@ -74,18 +74,19 @@
     </form>
 
   </div>
-  <hr>
-  <div class="container">
+  <footer style="background-color: grey;">
+  <div class="container" >
   
-      <div class="footer text-center font-small unique-color-dark pt-4">
+   
  
 
   
-  <p style="font-size:18px;"><strong>Dukunde Marie Jeanne 2019</strong></p>
+  <p style="font-size:18px;text-align: center; color: white;margin-left: 20%;"><strong>Dukunde Marie Jeanne 2019</strong></p>
      
  
-  </div>
+ 
 </div>
+</footer>
   <style>
     .parent{
       overflow: hidden;
