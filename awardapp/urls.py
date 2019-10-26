@@ -11,9 +11,9 @@ urlpatterns=[
     url(r'^myprofile/$',  views.profilemy,name='profilemy'),
     url(r'^comment/(\d+)/$', views.add_comment, name='comment'),
     url(r'^likes/(?P<id>\d+)',views.likes,name="like"),
-    url(r'^search/',  views.search_results,name='search_results'),
+    url(r'^search/$',  views.search_results,name='search_results'),
     url(r'^projects/(\d+)',views.projects,name='projects'),
-    url(r'^ajax/newsletter/$', views.newsletter, name='newsletter'),
+    # url(r'^ajax/newsletter/$', views.newsletter, name='newsletter'),
     url(r'^api/merch/$', views.MerchList.as_view()),
     url(r'^api/merch/profile/$', views.MerchListProfile.as_view())
 

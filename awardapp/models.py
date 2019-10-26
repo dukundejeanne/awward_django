@@ -16,9 +16,9 @@ class Project(models.Model):
     pub_date=models.DateTimeField(auto_now_add=True,null=True)
 
     @classmethod
-    def search_by_title(cls,search_term):
-        projects=cls.objects.filter(title__icontains=search_term)
-        return projects
+    def search_by_title(cls,title):
+        proj=cls.objects.filter(title__icontains=title)
+        return proj
 
     @classmethod
     def get_all_images(cls):

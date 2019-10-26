@@ -24,16 +24,16 @@ def home_images(request):
     current_user=request.user
     myprof=Profile.objects.filter(id=current_user.id).first()
     comment=Comment.objects.filter(id=current_user.id).first()
-    form=NewsLetterForm
-    if request.method== 'POST':
-        form=NewsLetterForm(request.POST or None)
-        if form.is_valid():
-            name=form.cleaned_data['your_name']
-            email=form.cleaned_data['email']
-            recipient=NewsLetterRecipients(name=name,email=email)
-            recipient.save()
-            send_welcome_email(name,email)
-            HttpResponseRedirect('home_images')
+    form=NewsLetterForm()
+    # if request.method== 'POST':
+    #     form=NewsLetterForm(request.POST or None)
+    #     if form.is_valid():
+    #         name=form.cleaned_data['your_name']
+    #         email=form.cleaned_data['email']
+    #         recipient=NewsLetterRecipients(name=name,email=email)
+    #         recipient.save()
+    #         send_welcome_email(name,email)
+    #         HttpResponseRedirect('home_images')
     return render(request,'index.html',{"pictures":pictures,'letterForm':form,"comment":comment,"myprof":myprof})
 
 @login_required(login_url='/accounts/login/')
@@ -101,8 +101,8 @@ def add_comment(request,image_id):
 
 def search_results(request):
 
-    if 'username' in request.GET and request.GET["username"]:
-        search_term = request.GET.get("username")
+    if 'title' in request.GET and request.GET["title"]:
+        search_term = request.GET.get("title")
         searched_title = Project.search_by_title(search_term)
         message = f"{search_term}"
 
@@ -140,15 +140,18 @@ def projects(request,id):
     usability=[]
     design=[]
     content=[]
+    aver_usability=0
+    aver_design=0
+    aver_content=0
     for i in calcul:
         usability.append(i.usability)
         design.append(i.design)
         content.append(i.content)
 
         if len(usability)>0 or len(design)>0 or len(content)>0:
-            aver_usability=round(sum(usability)/len(usability))
-            aver_design=round(sum(design)/len(design))
-            aver_content=round(sum(content)/len(content))
+            aver_usability+= round(sum(usability)/len(usability))
+            aver_design+= round(sum(design)/len(design))
+            aver_content+= round(sum(content)/len(content))
         else:
             aver_usability=0.0
             aver_design=0.0
@@ -156,15 +159,15 @@ def projects(request,id):
     
     return render(request,'one_project.html',{"projects":projects,"all":all,"form":form,"usability":aver_usability,"design":aver_design,"content":aver_content})
 
-def newsletter(request):
-    name = request.POST.get('your_name')
-    email = request.POST.get('email')
+# def newsletter(request):
+#     name = request.POST.get('your_name')
+#     email = request.POST.get('email')
 
-    recipient = NewsLetterRecipients(name=name, email=email)
-    recipient.save()
-    send_welcome_email(name, email)
-    data = {'success': 'You have been successfully added to mailing list'}
-    return JsonResponse(data)
+#     recipient = NewsLetterRecipients(name=name, email=email)
+#     recipient.save()
+#     send_welcome_email(name, email)
+#     data = {'success': 'You have been successfully added to mailing list'}
+#     return JsonResponse(data)
 
 class MerchList(APIView):
     def get(self, request, format=None):

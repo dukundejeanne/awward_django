@@ -6,9 +6,9 @@
 //   }) // End of document ready function
 
   $(document).ready(function(){
-    $('form').submit(function(event){
+    $('#fora').submit(function(event){
       event.preventDefault()
-      form = $("form")
+      form = $("#fora")
   
       $.ajax({
         'url':'/ajax/newsletter/',
