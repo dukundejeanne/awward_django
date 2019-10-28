@@ -42,65 +42,61 @@
             <br>
            
 <!-- not typed -->
-<div class="modal fade" id="votesform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold" id="vote">Vote</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-                <div class="form animated slideInDown">
-                                <form action="{% url 'projects' images.id %}"method="POST">
+<div class="modal fade" id="votesform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+        <div class="modal-content">
+                <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" id="vote">Vote</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body mx-3">
+                        <div class="form animated slideInDown">
+                                <form action="{% url 'projects' images.id %" method="POST">
                                         {% csrf_token %}
                                         {% bootstrap_form form %}
-                                        <button class="btn btn-outline-info modal-footer d-flex justify-content-center" type="submit">Submit <i class="fas fa-paper-plane-o ml-1"></i> </button>
+                                        <button class="btn btn-outline-info modal-footer d-flex justify-content-center" type="submit">Submit </button>
                                 </form>
                         </div>
-      </div>
- 
-      </div>
-    </div>
-  </div>
+                </div>
+        </div>
 </div>
-{% endfor %}
-      
-        </div>
-        <div class="card comments">
-                <div class="card-header">
-                        <h4> Total Votes: {{all|length}} </h4>
-                </div>
-                <div class="list-group">
-                        <ul class="list-group">
-                                {%if all%}
-                                <table id='comm' class="table">
-                                        <th>Voters</th>
-                                        <th>Rating</th>
-                                        {%for one in all%}<tr>
-                                                <td> <img src="{{one.user.profile.profile_photo.url}}" alt="" width='30px' height="30px">  {{one.user}}</td>
-                                                <td>
-                                                        <div class="design">
-                                                                <a href="" class="scores">{{one.design}}</a>
-                                                                <a href="">{{one.usability}}</a>
-                                                                <a class='b' href="">{{one.content}}</a>
-                                                        </div>
-                                                </td>
-                                                {%endfor%}
-                                </table>
-                                {%else%}
-                                <li class="list-group-item alert alert-info">No votes Available</li>
-                                {%endif%}
-                        </ul>
-                </div>
-        </div>
-        </div>
-        </div>
-        <div>
-        
+</div>
+</div>
 
+{% endfor %}
+</div>
+<div class="card comments">
+        <div class="card-header">
+                <h4>Total votes: {{all|length}}</h4>
+        </div>
+        <div class="list-group">
+                <ul class="list-group">
+                        {% if all %}
+                        <table id="comm" class="table">
+                                <th>Voters</th>
+                                <th>Rates</th>
+                                {% for one in all %}
+                                <tr>
+                                        <td><img src="{{one.user.profile.profile_pic.url}}" alt="" width="30px" height="30px">{{one.user}}</td>
+                                        <td>
+                                                <div class="design">
+                                                        <a href="" class="scores"> {{one.design}}</a>
+                                                        <a href="" > {{one.usability}}</a>
+                                                        <a href="" class="b"> {{one.content}}</a>
+                                                </div>
+                                        </td>
+                                </tr>
+                                {% endfor %}
+                        </table>
+                        {% else %}
+                                <li class="list-group-item alert alert-info">No votes Available</li>
+                                {% endif %}
+                        </ul>
+        </div>
+</div>
+</div>
+</div>
+</div>
 </body>
 
 <style>
