@@ -45,8 +45,8 @@ class Project(models.Model):
         pictures=cls.objects.filter(name__icontains=search_iterm)
         return pictures
     @classmethod
-    def filter_by_name(cls,name):
-        images=Project.objects.filter(name=name)
+    def filter_by_name(cls,title):
+        images=Project.objects.filter(title=title)
         return images
 
 class Profile(models.Model):

@@ -18,7 +18,7 @@ class ImageTestClass(TestCase):
         self.user1.save()
         
         
-        self.image=Project(name='leaves',description='beautiful',user=self.user1,likes="1",post="image")
+        self.image=Project(title='leaves',description='beautiful',user=self.user1,likes="1",post="image")
         self.image.save_image()
 
  
@@ -30,7 +30,7 @@ class ImageTestClass(TestCase):
         test image by save
         '''
         self.image.save_image()
-        images=Image.objects.all()
+        images=Project.objects.all()
         self.assertTrue(len(images)>0) 
    
 
@@ -48,8 +48,8 @@ class ImageTestClass(TestCase):
         test of filter image by location
         '''
         self.image.save_image()
-        img=self.image.filter_by_name(self.image.name)
-        image=Image.objects.filter(name=self.image.name)
+        img=self.image.filter_by_name(self.image.title)
+        image=Project.objects.filter(title=self.image.title)
         self.assertTrue(img,image)
 
 class CommentTestClass(TestCase):
@@ -61,7 +61,7 @@ class CommentTestClass(TestCase):
         self.nature=Profile(2,user=self.user1,bio='Nature')
         self.nature.save_prof()
 
-        self.james=Project(2,name='James',description='beautiful',user=self.user1,likes="1",post="image")
+        self.james=Project(2,title='James',description='beautiful',user=self.user1,likes="1",post="image")
         self.james.save_image()
       
         self.com=Comment(comment='leaves',comment_image=self.james,posted_by=self.nature,)
